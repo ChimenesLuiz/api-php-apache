@@ -7,16 +7,21 @@ class ResponseController {
     public function __construct() {
     }
 
-    public function create(bool $use_static) {
-        if ($use_static) {
-            $src = __DIR__."/../Config/response.json";
-            $this->response_string = file_get_contents($src);
-            $this->response_array = json_decode($this->response_string, true);
-        } else {
-            $this->response_array = [];
-            $this->response_array["info"]["status"];
-            $this->response_array["info"]["message"];
-        }
+    public function create(array $data = [], $message = "") {
+            if (count($data) == 0) {
+                $src = __DIR__."/../Config/response.json";
+                $this->response_string = file_get_contents($src);
+                $this->response_array = json_decode($this->response_string, true);
+            } else {
+                $this->response_array = [];
+                $this->response_array["info"]["status"] = "success";
+                $this->response_array["info"]["message"] = $message;
+                foreach ($data as $key => $value) {
+                    $this->response_array["data"][$key] = $value;
+                }
+            }
+
+
     }
 
 

@@ -26,6 +26,20 @@ class Database {
 
         $this->disconnect();
     }
+
+    public function insert(): void {
+        $this->connect();
+
+        try {
+            $sql = "INSERT INTO users(username, email, password) VALUES('aaaaaaaa', 'emaaaail', 'senhaaaa')";
+            $this->mysql->query($sql);
+        } catch (\mysqli_sql_exception $mysqli_error) {
+            throw $mysqli_error;
+        }
+
+        $this->disconnect();
+    }
+
     private function disconnect() {
         $this->mysql->close();
     }

@@ -28,7 +28,10 @@ class RequestController {
     }
 
     
-
+    public function getService() {
+        $service = $this->request_array["info"]["service"];
+        return $service;
+    }
     // public function hasError() {
     //     $status = $this->response["info"]["status"];
     //     if ($status == "error") {

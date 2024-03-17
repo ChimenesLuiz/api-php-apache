@@ -13,6 +13,5 @@ if (strlen($request) == 0) {
     $response = $api->start($request);
 }
 
-
 header('Content-Type: application/json');
 echo json_encode($response, true);

@@ -12,13 +12,15 @@ class User {
         $this->database = new Database();
     }
     
-    public function getAll() {
+    public function getAll(): array {
         $data = $this->database->select();
         if ($data -> num_rows == 0) {
             throw new Exception("Nao existe nenhum usuario cadastrado");
         }
-    //     if ($data->num_rows == 0) {
-    //         
-    //     }
+        return $data -> fetch_all();
+    }
+
+    public function create() {
+        $this->database->insert();
     }
 }
