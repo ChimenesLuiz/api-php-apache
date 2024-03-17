@@ -1,2 +1,2 @@
 # api-php-apache
-api usando (docker, php, apache2, autoload) -> backend
+api usando (php, apache2, autoload) -> backend
