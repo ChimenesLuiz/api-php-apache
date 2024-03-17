@@ -2,6 +2,7 @@
 namespace Controllers;
 use Controllers\RequestController;
 use Controllers\ResponseController;
+use Models\User;
 
 class ApiController {
     private RequestController $request;
@@ -12,26 +13,23 @@ class ApiController {
         $this->response = new ResponseController();
     }
 
-    public function collect() {
-
-    }
-
-    // public function getService(): string {
-    //     // $request = $this->request->getRequest();
-    //     // $service = $request["info"]["service"];
-    //     // return $service;
-    // }
-
     public function start(string $request) {
         try {
             $this->request->setRequest($request);
+
+            $user = new User();
+            $database_response = $user->getAll();
+            
+            $this->response->create(false);
+
+
         } catch (\Throwable $th) {
             $error = $th->getMessage();
-            $this->response->setResponse();
+            $this->response->create(true);
             $this->response->error($error);
             $response = $this->response->getResponse();
-            header('Content-Type: application/json');
-            echo json_encode($response, true);
+            
+            return $response;
         }
         
     }

@@ -8,7 +8,11 @@ $request = file_get_contents("php://input");
 if (strlen($request) == 0) {
     //ENTRADA EXEMPLO
     $static_request = file_get_contents("request.json");
-    $api->start($static_request);
+    $response = $api->start($static_request);
 } else {
-    $api->start($request);
+    $response = $api->start($request);
 }
+
+
+header('Content-Type: application/json');
+echo json_encode($response, true);
